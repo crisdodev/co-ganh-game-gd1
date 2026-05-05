@@ -214,6 +214,12 @@ export function executeMove(move: GameMove, state: BoardState): BoardState {
     if (capturedPiece) capturedPiece.owner = newState.currentPlayer;
   }
 
+  // =========================================================================
+  // [UC-5: Theo dõi diễn biến và kết thúc ván cờ] - Đảm nhận: Chí
+  // Chức năng: Model - Kiểm đếm số lượng quân và kiểm tra các điều kiện Game Over:
+  // 1. Một bên bị ăn sạch quân (hoặc đối phương đớp đủ 16 quân).
+  // 2. Một bên đến lượt nhưng không còn nước đi hợp lệ nào (bị kẹt, "kẹt quân").
+  // =========================================================================
   const p1Count = newState.pieces.filter((p) => p.owner === "player1").length;
   const p2Count = newState.pieces.filter((p) => p.owner === "player2").length;
 

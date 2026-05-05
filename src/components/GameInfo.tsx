@@ -13,6 +13,12 @@ export default function GameInfo({
   pieces,
   color,
 }: GameInfoProps) {
+  // =========================================================================
+  // [UC-5: Theo dõi diễn biến và kết thúc ván cờ] - Đảm nhận: Chí
+  // Chức năng: View - Component hiển thị thông tin bảng thống kê (Sidebar).
+  // Đóng vai hiển thị các dữ liệu từ Model đẩy ra: Số lượng quân còn lại,
+  // Đổi trạng thái hiển thị: "Đến lượt" / "Đang chờ".
+  // =========================================================================
   return (
     <div
       className={`
