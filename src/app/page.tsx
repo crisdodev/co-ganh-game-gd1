@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 // =========================================================================
 // [UC-1: Khởi động và Thiết lập ván cờ] - Đảm nhận: Phúc
 // Chức năng: Màn hình Landing Page giới thiệu luật chơi và nút Chơi Ngay
-// =========================================================================export default function Home() {
+// =========================================================================
+export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <div className="max-w-2xl w-full text-center space-y-8">
