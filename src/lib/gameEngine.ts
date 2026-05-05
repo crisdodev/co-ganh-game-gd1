@@ -65,6 +65,10 @@ export function initializeBoard(): BoardState {
   };
 }
 
+// =========================================================================
+// [UC-3: Xác thực tính hợp lệ của nước đi] - Đảm nhận: Long
+// Chức năng: Model/Controller - Chặn lỗi đi ra ngoài bàn cờ hoặc đi vào ô đã có quân
+// =========================================================================
 function isValidPosition(x: number, y: number, pieces: Piece[]): boolean {
   if (x < 0 || x >= BOARD_SIZE || y < 0 || y >= BOARD_SIZE) {
     return false;
@@ -72,6 +76,11 @@ function isValidPosition(x: number, y: number, pieces: Piece[]): boolean {
   return !pieces.some((p) => p.x === x && p.y === y);
 }
 
+// =========================================================================
+// [UC-3: Xác thực tính hợp lệ của nước đi] - Đảm nhận: Long
+// Chức năng: Model/Controller - Lấy danh sách các ô kề cận hợp lệ để di chuyển
+// Gắn với Giai đoạn 2: Nơi nhúng thêm thuật toán chặn đường chéo (chỉ cho phép ô chẵn)
+// =========================================================================
 export function getValidMoves(
   pieceId: string,
   state: BoardState,
