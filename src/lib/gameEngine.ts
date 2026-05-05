@@ -113,6 +113,11 @@ export function getValidMoves(
   return validMoves;
 }
 
+// =========================================================================
+// [UC-4: Thực thi luật bắt quân] - Đảm nhận: Phước (Chủ thớt)
+// Chức năng: Model - Tính toán mảng dữ liệu ngầm để chạy "Luật Gánh" và mở rộng "Luật Chầu (4, 6)".
+// Thuật toán: Bắn tia (Raycast) qua 4 trục tọa độ xuyên qua vị trí vừa đặt để tìm các cặp đối xứng.
+// =========================================================================
 function processGanh(
   movedPieceId: string,
   newX: number,
@@ -154,6 +159,10 @@ function processGanh(
   return capturedIds;
 }
 
+// =========================================================================
+// [UC-4: Thực thi luật bắt quân] (GIAI ĐOẠN 2 NÂNG CẤP) - Đảm nhận: Phước
+// Chức năng chờ: Dummy Function thiết lập khung gốc cho "Luật Chẹt"
+// =========================================================================
 function processChat(
   movedPieceId: string,
   newX: number,
@@ -163,6 +172,10 @@ function processChat(
   return []; // FIXME: Dummy function for Phase 2
 }
 
+// =========================================================================
+// [UC-4: Thực thi luật bắt quân] (GIAI ĐOẠN 2 NÂNG CẤP) - Đảm nhận: Phước
+// Chức năng chờ: Dummy Function thiết lập khung gốc cho "Luật Vây" (Chặn đường lui)
+// =========================================================================
 function processSurrounding(pieces: Piece[]): string[] {
   return []; // FIXME: Dummy function for Phase 2
 }
@@ -185,6 +198,11 @@ export function executeMove(move: GameMove, state: BoardState): BoardState {
   piece.x = move.toX;
   piece.y = move.toY;
 
+  // =========================================================================
+  // [UC-4: Thực thi luật bắt quân] - Đảm nhận: Phước
+  // Chức năng: Model - Cập nhật đồng loạt màu của các quân địch bị bắt (chuyển sang phe ta).
+  // React sẽ dựa vào mảng update này để render đổi màu trên giao diện một cách liền mạch.
+  // =========================================================================
   const ganhCaptured = processGanh(
     move.pieceId,
     move.toX,
