@@ -28,6 +28,11 @@ export interface GameMove {
 export const BOARD_SIZE = 5;
 export const TOTAL_PIECES = 16;
 
+// =========================================================================
+// [UC-1: Khởi động và Thiết lập ván cờ] - Đảm nhận: Phúc
+// Chức năng: Khởi tạo mảng bàn cờ 5x5, xếp 16 quân cờ đối xứng nhau và set lượt đi đầu tiên
+// Model: Xử lý quy hoạch dữ liệu nền tảng ban đầu
+// =========================================================================
 export function initializeBoard(): BoardState {
   const pieces: Piece[] = [];
   let id = 0;

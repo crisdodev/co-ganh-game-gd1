@@ -16,6 +16,7 @@ export default function GameControls({
     <div className="flex flex-col gap-4">
       <div className="bg-card border border-border rounded-lg p-6 shadow-lg">
         <div className="flex flex-wrap gap-3 justify-center">
+          {/* [UC-1] Thiết lập ván cờ (Phúc): Nút Restart gọi hàm initGame */}
           <Button
             onClick={onRestart}
             variant="outline"

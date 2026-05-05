@@ -5,7 +5,11 @@ export function useGameState() {
   const [boardState, setBoardState] = useState<BoardState | null>(null);
   const [selectedPiece, setSelectedPiece] = useState<string | null>(null);
 
-  // Khởi tạo ván cờ, bọc trong useCallback để có thể gọi lại dễ dàng
+  // =========================================================================
+  // [UC-1: Khởi động và Thiết lập ván cờ] - Đảm nhận: Phúc
+  // Chức năng: Controller gọi Model để khởi tạo/reset mảng game
+  // Dùng chung cho khi mới tải trang và khi bấm nút "Chơi lại ván mới"
+  // =========================================================================
   const initGame = useCallback(() => {
     setBoardState(initializeBoard());
     setSelectedPiece(null);
