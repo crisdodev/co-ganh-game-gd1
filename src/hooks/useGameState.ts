@@ -15,6 +15,10 @@ export function useGameState() {
     setSelectedPiece(null);
   }, []);
 
+  // =========================================================================
+  // [UC-2: Tương tác di chuyển quân cờ] - Đảm nhận: Nam
+  // Chức năng: Controller - Quản lý state chọn quân cờ trên UI
+  // =========================================================================
   const handlePieceSelect = useCallback((pieceId: string) => {
     setSelectedPiece(prev => (prev === pieceId ? null : pieceId));
   }, []);

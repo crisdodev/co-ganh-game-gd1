@@ -35,6 +35,11 @@ export default function GameBoard({
     return boardState.pieces.find(p => p.x === x && p.y === y)
   }
 
+  // =========================================================================
+  // [UC-2: Tương tác di chuyển quân cờ] - Đảm nhận: Nam
+  // Chức năng: View - Bắt sự kiện khi click vào một ô vuông, xử lý việc chọn quân
+  // và xác nhận ô muốn đi tới.
+  // =========================================================================
   const handleSquareClick = (x: number, y: number) => {
     if (gameOver) return
 
@@ -78,18 +83,19 @@ export default function GameBoard({
                     ${(x + y) % 2 === 0 ? 'bg-muted' : 'bg-background'}
                     hover:bg-opacity-80 cursor-pointer
                     relative
+                    ${/* [UC-2] Nam: Highlight khung viền khi chọn quân cờ */ ''}
                     ${isSelected ? 'ring-4 ring-accent' : ''}
                     ${gameOver ? 'cursor-not-allowed' : ''}
                   `}
                 >
-                  {/* Valid move indicator */}
+                  {/* [UC-2] Nam: Render dấu chấm gợi ý nước đi */}
                   {isValid && (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-3 h-3 bg-accent rounded-full"></div>
                     </div>
                   )}
 
-                  {/* Piece */}
+                  {/* [UC-2] Nam: Render biểu tượng quân cờ. Chuẩn bị cho Animation GĐ2 */}
                   {piece && (
                     <div
                       className={`
