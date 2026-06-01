@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 // =========================================================================
-// [UC-1: Khởi động và Thiết lập ván cờ] - Đảm nhận: Phúc
+// [UC-1: Khởi tạo và Thiết lập ván cờ]
 // Chức năng: Màn hình Landing Page giới thiệu luật chơi và nút Chơi Ngay
 // =========================================================================
 export default function Home() {

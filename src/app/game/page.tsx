@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect } from "react";
 import GameBoard from "@/components/GameBoard";
@@ -19,8 +19,15 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export default function GamePage() {
-  const { boardState, selectedPiece, initGame, handlePieceSelect, handleMove } =
-    useGameState();
+  const {
+    boardState,
+    selectedPiece,
+    timeLeft,
+    scores,
+    initGame,
+    handlePieceSelect,
+    handleMove,
+  } = useGameState();
 
   useEffect(() => {
     initGame();
@@ -61,10 +68,15 @@ export default function GamePage() {
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Message */}
         {boardState.message && (
-          <div className="mb-6 p-4 bg-card border border-border rounded-lg text-center">
+          <div className="mb-6 p-4 bg-card border border-border rounded-lg text-center shadow-sm">
             <p className="text-lg font-semibold text-foreground">
               {boardState.message}
             </p>
+            {boardState.phase === "playing" && (
+              <p className="text-sm text-muted-foreground mt-1">
+                Lượt đi không bắt quân: {boardState.movesWithoutCapture} / 50
+              </p>
+            )}
           </div>
         )}
 
@@ -76,6 +88,13 @@ export default function GamePage() {
               isActive={boardState.currentPlayer === "player1"}
               pieces={player1Count}
               color="bg-primary/10 border-primary"
+              score={scores.player1}
+              timeLeft={
+                boardState.currentPlayer === "player1" &&
+                boardState.phase === "playing"
+                  ? timeLeft
+                  : undefined
+              }
             />
           </div>
 
@@ -86,7 +105,7 @@ export default function GamePage() {
               selectedPiece={selectedPiece}
               onPieceSelect={handlePieceSelect}
               onMove={handleMove}
-              gameOver={boardState.gameOver}
+              gameOver={boardState.phase !== "playing"}
             />
           </div>
 
@@ -97,13 +116,20 @@ export default function GamePage() {
               isActive={boardState.currentPlayer === "player2"}
               pieces={player2Count}
               color="bg-secondary/10 border-secondary"
+              score={scores.player2}
+              timeLeft={
+                boardState.currentPlayer === "player2" &&
+                boardState.phase === "playing"
+                  ? timeLeft
+                  : undefined
+              }
             />
           </div>
         </div>
 
         {/* Game Controls - Below Board */}
         <div className="mt-8 flex justify-center">
-          <GameControls onRestart={initGame} gameOver={boardState.gameOver} />
+          <GameControls onRestart={initGame} />
         </div>
 
         {/* Mobile Player Info */}
@@ -121,16 +147,22 @@ export default function GamePage() {
                 : player2Count
             }
             color="bg-primary/10 border-primary"
+            score={
+              boardState.currentPlayer === "player1"
+                ? scores.player1
+                : scores.player2
+            }
+            timeLeft={boardState.phase === "playing" ? timeLeft : undefined}
           />
         </div>
       </div>
 
       {/* =========================================================================
-        [UC-5: Theo dõi diễn biến và kết thúc ván cờ] - Đảm nhận: Chí
+        [UC-5: Cập nhật diễn biến và xử lý kết quả]
         Chức năng: View - Hiển thị Popup (Dialog) thông báo kết quả Game Over.
         Đại diện chốt hạ cho luồng MVC: Model (kiểm tra GameOver) -> View (Mở Popup).
         ========================================================================= */}
-      <AlertDialog open={boardState.gameOver}>
+      <AlertDialog open={boardState.phase !== "playing"}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Trò Chơi Kết Thúc!</AlertDialogTitle>
